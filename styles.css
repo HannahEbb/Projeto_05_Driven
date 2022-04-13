@@ -36,6 +36,7 @@ body {
 
 .container {
     height: 507px;
+    margin-top: 120px;
 }
 
 .bottombar {
@@ -65,4 +66,33 @@ body {
     color: #0000;
     /* DEIXAR O TEXTO DE DENTRO DO INPUT NA COR PRETA */
 }
+
+/* MENSAGENS ADICIONADAS VIA SCRIPT */
+
+.message  {
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 4px;
+}
+
+.message h4 {
+color: #AAAAAA;
+font-size: 14px;
+margin-left: 8px;
+}
+
+.message h3 {
+    color: black;
+    font-size: 14px;
+    margin-left: 10px;
+    }
+
+.private {
+    background-color: #FFDEDE;
+}
+
+
 
