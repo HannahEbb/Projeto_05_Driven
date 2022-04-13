@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap");
+
+body {
+    background-color:  #E5E5E5;
+    font-family: "Roboto", sans-serif;
+    max-width: 375px;
+    max-height: 667px;
+}
+
+.header {
+    background-color: #FFFFFF;
+    width: 100%;
+    margin: 0 auto;    
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.header img {
+    width: 75px;
+    height: 53px;
+    margin: 16px 22px 11px;
+
+}
+
+.header ion-icon {
+    font-size: 45px;
+    margin-right: 23px ;
+}
+
+.container {
+    height: 507px;
+}
+
+.bottombar {
+    background-color: #FFFFFF;
+    width: 100%;
+    margin: 0 auto;    
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.bottombar ion-icon {
+    font-size: 30px;
+    margin-right: 23px ;
+}
+
+.bottombar input {
+    margin-left: 22px;
+    border: none;
+    font-size: 18px;
+    color: #0000;
+    /* DEIXAR O TEXTO DE DENTRO DO INPUT NA COR PRETA */
+}
+
