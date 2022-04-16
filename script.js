@@ -7,19 +7,18 @@
 
 let users = [];
 
-getData ()
+enterRoom ()
 
 function getData () {
   const promise = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
   promise.then(chargeData);
-  console.log("executando")
+  console.log(promise)
 }
 
 function enterRoom () {
 
-  const userName = document.querySelector(".name").value;
   const enteredRoom = {
-    name: `${userName}`
+    name: "Céline Dion"
   }; 
 
   const promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', enteredRoom);
@@ -34,17 +33,25 @@ function chargeData (response) {
   // Se a promise for bem sucedida, chama "carregarDados", que faz um get para o servidor para pegar o nome dos participantes do chat. Se tiver response positivo, chama a função displayName, para jogar a div na tela (com o scroll)
   users = response.data;
   displayName();
+  console.log(users)
 
 }
 
 
 function displayName () {
-  //<div class="message enteredchat"> <h4>"hora"</h4> <h3>"mensagem aqui"</h3> </div>
+  const display = document.querySelector(".container");
+  display.scrollIntoView();
+  let date = Date();
 
+  for(let i = 0; i < users.length; i++) {
+    display.innerHTML += `
+    <div class="message enteredchat"> <h4>${date.slice(16, 24)}</h4> <h3> <strong>${users[i].name}</strong> entrou na sala </h3> </div>
+   `;
+
+  }
+
+  
 }
-
-
-// END - PARTE 01 - REQUISIÇÃO ENVIAR DADOS AO SERVIDOR - entrar na sala
 
 
 
