@@ -62,10 +62,14 @@ body {
 .bottombar input {
     margin-left: 22px;
     border: none;
-    font-size: 18px;
-    color: #0000;
-    /* DEIXAR O TEXTO DE DENTRO DO INPUT NA COR PRETA */
+    font-size: 18px;   
+    font-style: normal;
+    color: -internal-light-dark(black, white);
+    font-weight: 500;
+    appearance: value;
 }
+
+
 
 /* MENSAGENS ADICIONADAS VIA SCRIPT */
 
