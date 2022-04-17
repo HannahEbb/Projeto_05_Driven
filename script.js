@@ -1,18 +1,16 @@
 
-//LINK DA PÁGINA COM INFORMAÇÕES DO API DO PROJETO: https://bootcampra.notion.site/API-Chat-UOL-1df39c2a8d75450f9b82920163d306b0
-
-//VARIÁVEIS GLOBAIS
+// VARIÁVEIS GLOBAIS
 
 const display = document.querySelector(".container");
-display.scrollIntoView();
+display.scrollIntoView(); 
 
 userName = "";
 let messages = [];
 
-//CHAMAR FUNÇÕES + PROMPT
+// CHAMAR FUNÇÕES 
 
 enterRoom ();
-setInterval(stayConnected, 5000);
+setInterval(stayConnected, 5000); // faz com que o scroll fique infinito
 userName = "";
 
 
@@ -32,6 +30,8 @@ function enterRoom () {
   }
 
 
+// PARTE 02 - CARREGAR MENSAGENS QUE JÁ ESTÃO NO SERVIDOR - GET
+
   function getData () {
     const promise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
     promise.then(chargeData);
@@ -42,6 +42,9 @@ function enterRoom () {
     messages = response.data;
     displayMessages();
   }
+
+
+ // PARTE 03 - MANTER CONEXÃO - POST
 
   function stayConnected () {
 
@@ -57,9 +60,7 @@ function enterRoom () {
   
 
 
-
-// PARTE 02 - CARREGAR MENSAGENS QUE JÁ ESTÃO NO SERVIDOR A CADA 3 SEGUNDOS - assim que usuário entra na página
-
+// PARTE 04 - EXIBIR MENSAGENS QUE JÁ ESTÃO NO SERVIDOR 
 
 function displayMessages () {
   for(i = 0; i < messages.length; i++) {
@@ -87,8 +88,7 @@ if (messages[i].to === "Todos" && messages[i].type === "message") {
 }
 
 
-
-// PARTE 03 - REQUISIÇÃO ENVIAR DADOS AO SERVIDOR - enviar mensagens
+// PARTE 05 - REQUISIÇÃO PARA ENVIAR MENSAGENS - POST
 
 function sendMessage () {
 
@@ -101,13 +101,14 @@ function sendMessage () {
   
     const promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', messageSent);
   
-    promise.then(getData);
-    document.querySelector('input').value = ""
+    promise.then(getData); // volta pegar as mensagens do servidor - PARTE 02
+    document.querySelector('input').value = "" // apaga msg no input
     promise.catch(window.location.reload());
   }
 
 
-// TRATAMENTO DE ERROS
+
+// TRATAMENTO DE ERROS - sempre dá 400, independetemente de nome igual ou não. Então separei em duas formas de tratar
 
 function informError01 (error) {
   if (error.response.status === 400) {
@@ -119,5 +120,9 @@ function informError01 (error) {
 }
 
 function informError02 (error) {
-    alert("Problemas com o servidor. Tente novamente mais tarde.")
+  if (error.response.status === 400) {
+    alert("Problemas com o servidor. Tente novamente mais tarde.");
+  } else {
+    alert("Problemas com o servidor. Tente novamente mais tarde.");
+  }
 }
