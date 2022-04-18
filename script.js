@@ -2,7 +2,7 @@
 // VARIÁVEIS GLOBAIS
 
 const display = document.querySelector(".container");
-display.scrollIntoView(); 
+display.scroll(); 
 
 userName = "";
 let messages = [];
@@ -10,7 +10,8 @@ let messages = [];
 // CHAMAR FUNÇÕES 
 
 enterRoom ();
-setInterval(stayConnected, 5000); // faz com que o scroll fique infinito
+setInterval(stayConnected, 5000); 
+setInterval(getData, 3000);
 userName = "";
 
 
@@ -36,6 +37,7 @@ function enterRoom () {
     const promise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
     promise.then(chargeData);
     promise.catch(informError02);
+    document.querySelector('input').value = "" // apaga msg no input
   }
 
   function chargeData (response) {
@@ -63,13 +65,13 @@ function enterRoom () {
 // PARTE 04 - EXIBIR MENSAGENS QUE JÁ ESTÃO NO SERVIDOR 
 
 function displayMessages () {
+
   for(i = 0; i < messages.length; i++) {
 if (messages[i].to === "Todos" && messages[i].type === "message") {
 
   display.innerHTML += `
   <div class="message"> <h4>${messages[i].time}</h4> <h3> <strong>${messages[i].from}</strong> para <strong>${messages[i].to}:</strong> ${messages[i].text}</h3> </div>
  `;
-
 
 } if (messages[i].to === userName && messages[i].type === "message") {
 
@@ -81,9 +83,9 @@ if (messages[i].to === "Todos" && messages[i].type === "message") {
   display.innerHTML += `
   <div class="message enteredchat"> <h4>${messages[i].time}</h4> <h3> <strong>${messages[i].from}</strong> ${messages[i].text} </h3> </div>
  `;
-} 
 
-  }
+} scrollIntoView(display.lastElementChild);
+  }     
 
 }
 
@@ -102,7 +104,6 @@ function sendMessage () {
     const promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', messageSent);
   
     promise.then(getData); // volta pegar as mensagens do servidor - PARTE 02
-    document.querySelector('input').value = "" // apaga msg no input
     promise.catch(window.location.reload());
   }
 
@@ -121,8 +122,11 @@ function informError01 (error) {
 
 function informError02 (error) {
   if (error.response.status === 400) {
-    alert("Problemas com o servidor. Tente novamente mais tarde.");
+   // alert("Problemas com o servidor. Tente novamente mais tarde.");
+   return 
   } else {
-    alert("Problemas com o servidor. Tente novamente mais tarde.");
+    //alert("Problemas com o servidor. Tente novamente mais tarde.");
+return
   }
 }
+//OBS. Desativei esses 'alerts' porque ficavam aparecendo demais
